@@ -15,7 +15,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: gather-py3-versions
+    - id: gather-py3-versions
       run: |
           pys=`grep -P "python_requires = >=\d+.\d+, <\d+.\d+" -oh setup.cfg` # exits if missing
           minmin_maxmax=`echo "$pys" | sed 's/[^0-9]/ /g'`
