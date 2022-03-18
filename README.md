@@ -6,7 +6,6 @@ GitHub Action Package for Generating a Build Matrix of Supported Python Versions
 
 ```
 py-versions:
-  needs: [py-setup]
   runs-on: ubuntu-latest
   outputs:
     matrix: ${{ steps.versions.outputs.matrix }}
