@@ -16,7 +16,7 @@ py-versions:
       uses: WIPACrepo/wipac-dev-py-versions-action@v1
 
 pip-install:
-	needs: [py-versions]
+  needs: [py-versions]
   runs-on: ubuntu-latest
   strategy:
     max-parallel: 4
