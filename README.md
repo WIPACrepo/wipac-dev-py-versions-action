@@ -15,7 +15,7 @@ py-versions:
   steps:
     - uses: actions/checkout@v3
     - id: versions
-      uses: WIPACrepo/wipac-dev-py-versions-action@v1
+      uses: WIPACrepo/wipac-dev-py-versions-action@v#.#
 
 pip-install:
   needs: [py-versions]
