@@ -17,8 +17,8 @@ runs:
   steps:
     - id: gather-py3-versions
       run: |
-          pys=`grep -P "python_requires = >=\d+.\d+, <\d+.\d+" -oh setup.cfg` # exits if missing
-          minmin_maxmax=`echo "$pys" | sed 's/[^0-9]/ /g'`
+          pys=`grep -P "python_requires = >=3.\d+,( )*<3.\d+" -oh setup.cfg` # exits if missing
+          minmin_maxmax=`echo "$pys" | sed 's/[^0-9]/ /g'` # ex: 3 6 3 11
           echo $minmin_maxmax
           if [ -z "$minmin_maxmax" ]; then
             echo "could not retrieve 'python_requires' from 'setup.cfg'"
