@@ -17,7 +17,7 @@ runs:
   steps:
     - id: gather-py3-versions
       run: |
-          pys=`grep -P "python_requires = >=\d+.\d+, <\d+.\d+" -oh setup.cfg` # exits if missing
+          pys=`grep -P "python_requires = >=3.\d+,( )*<3.\d+" -oh setup.cfg` # exits if missing
           minmin_maxmax=`echo "$pys" | sed 's/[^0-9]/ /g'`
           echo $minmin_maxmax
           if [ -z "$minmin_maxmax" ]; then
@@ -25,7 +25,7 @@ runs:
             exit 1
           fi
           IFS=', ' read -r -a array <<< "$minmin_maxmax"
-          min_thru_max_series=$(for i in `seq ${array[1]} $((array[3]-1))`; do printf "'3.$i',"; done | rev | cut -c 2- | rev)
+          min_thru_max_series=$(for i in `seq ${array[0]} $((array[1]-1))`; do printf "'3.$i',"; done | rev | cut -c 2- | rev)
           echo ::set-output name=matrix::{\"py3_versions\":[$(echo $min_thru_max_series)]}\"
           echo $min_thru_max_series
       shell: bash
