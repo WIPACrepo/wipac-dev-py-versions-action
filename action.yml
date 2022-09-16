@@ -25,7 +25,7 @@ runs:
             exit 1
           fi
           IFS=', ' read -r -a array <<< "$minmin_maxmax"
-          min_thru_max_series=$(for i in `seq ${array[1]} $((array[3]-1))`; do printf "'3.$i',"; done | rev | cut -c 2- | rev)
-          echo "::set-output name=matrix::$(echo $min_thru_max_series | jq -cnR '[inputs | select(length>0)]')"
+          min_thru_max_series=$( for i in `seq ${array[1]} $((array[3]-1))`; do printf "3.$i "; done )
+          echo "::set-output name=matrix::$( echo $min_thru_max_series | jq -cR 'split(" ")' )"
           echo $min_thru_max_series
       shell: bash
