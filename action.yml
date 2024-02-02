@@ -19,7 +19,7 @@ runs:
       run: |
           pip3 install wipac-dev-tools[semvar]
 
-          SEMVAR_RANGE=$(grep "python_requires =" -h setup.cfg | awk -F 'python_requires =' '{print $2}')
+          export SEMVAR_RANGE=$(grep "python_requires =" -h setup.cfg | awk -F 'python_requires =' '{print $2}')
 
           MIN_THRU_MAX_SERIES=$(python -c '
           import os
