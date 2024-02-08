@@ -17,18 +17,18 @@ runs:
   steps:
     - id: gather-py-versions
       run: |
-          pip3 install wipac-dev-tools[semvar]
+          pip3 install wipac-dev-tools[semver]
 
-          export SEMVAR_RANGE=$(grep "python_requires =" -h setup.cfg | awk -F 'python_requires =' '{print $2}')
-          echo $SEMVAR_RANGE
+          export semver_RANGE=$(grep "python_requires =" -h setup.cfg | awk -F 'python_requires =' '{print $2}')
+          echo $semver_RANGE
 
           MIN_THRU_MAX_SERIES=$(python -c '
           import os
-          from wipac_dev_tools import semvar_parser_tools
-          top_python = semvar_parser_tools.get_latest_py3_release()
-          all_matches = semvar_parser_tools.list_all_majmin_versions(
+          from wipac_dev_tools import semver_parser_tools
+          top_python = semver_parser_tools.get_latest_py3_release()
+          all_matches = semver_parser_tools.list_all_majmin_versions(
             major=top_python[0],
-            semvar_range=os.environ["SEMVAR_RANGE"],
+            semver_range=os.environ["semver_RANGE"],
             max_minor=top_python[1],
           )
           print(" ".join(f"{v[0]}.{v[1]}" for v in all_matches))
