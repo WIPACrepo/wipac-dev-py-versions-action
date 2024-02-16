@@ -22,7 +22,7 @@ runs:
           export semver_RANGE=$(grep "python_requires =" -h setup.cfg | awk -F 'python_requires =' '{print $2}')
           echo $semver_RANGE
 
-          MIN_THRU_MAX_SERIES=$(python -c '
+          MIN_THRU_MAX_SERIES_SPACED=$(python -c '
           import os
           from wipac_dev_tools import semver_parser_tools
           top_python = semver_parser_tools.get_latest_py3_release()
@@ -34,5 +34,6 @@ runs:
           print(" ".join(f"{v[0]}.{v[1]}" for v in all_matches))
           ')
 
-          echo $MIN_THRU_MAX_SERIES
+          echo $MIN_THRU_MAX_SERIES_SPACED
+          echo "matrix=$( echo $MIN_THRU_MAX_SERIES_SPACED | jq -cR 'split(" ")' )" >> $GITHUB_OUTPUT
       shell: bash
