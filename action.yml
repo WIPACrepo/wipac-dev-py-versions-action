@@ -1,12 +1,6 @@
 name: 'WIPAC Dev Py Versions'
 description: 'GitHub Action Package for Generating a Build Matrix of Supported Python Versions for a Package'
 
-# inputs:
-#   who-to-greet:  # id of input
-#     description: 'Who to greet'
-#     required: true
-#     default: 'World'
-
 outputs:
   matrix:
     description: "List of Supported Python Versions"
