@@ -14,7 +14,7 @@ runs:
         pip3 install wipac-dev-tools[semver]
         
         MIN_THRU_MAX_SERIES_SPACED=$(python -c '
-        import os
+        import os, re
         from wipac_dev_tools import semver_parser_tools
         
         semver_range = ""
