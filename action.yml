@@ -20,7 +20,7 @@ runs:
         semver_range = ""
         if os.path.isfile("pyproject.toml"):
             # ex: requires-python = ">=3.8, <3.13"
-            pat = re.compile(r"requires-python = \"(?P<semver_range>[^\"]+)\"$"))
+            pat = re.compile(r"requires-python = \"(?P<semver_range>[^\"]+)\"$")
             with open("pyproject.toml") as f:
                 for line in f:
                     if m := pat.match(line):
@@ -29,7 +29,7 @@ runs:
                 raise Exception("could not find `requires-python` entry in pyproject.toml")
         elif os.path.isfile("setup.cfg"):
             # ex: python_requires = >=3.8, <3.13
-            pat = re.compile(r"python_requires = (?P<semver_range>.+)$"))
+            pat = re.compile(r"python_requires = (?P<semver_range>.+)$")
             with open("setup.cfg") as f:
                 for line in f:
                     if m := pat.match(line):
