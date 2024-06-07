@@ -1,0 +1,3 @@
+wipac-dev-tools[semver]
+typing-extensions
+requests
