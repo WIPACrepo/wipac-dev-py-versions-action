@@ -71,5 +71,6 @@ runs:
         echo $MIN_THRU_MAX_SERIES_SPACED
 
         # now, output
-        echo "matrix=$( echo $MIN_THRU_MAX_SERIES_SPACED | jq -cR 'split(\" \")' )" >> $GITHUB_OUTPUT
+        echo "matrix=$( echo $MIN_THRU_MAX_SERIES_SPACED | jq -cR 'split(" ")' )" >> $GITHUB_OUTPUT
+
       shell: bash
