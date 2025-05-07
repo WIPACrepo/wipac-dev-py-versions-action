@@ -25,18 +25,21 @@ runs:
         . action_venv/bin/activate
         pip3 install -r ${{ github.action_path }}/requirements.txt
 
-        SEMVER_RANGE="${{ inputs.range }}"
-        if [ -z "$SEMVER_RANGE" ]; then
-          SEMVER_RANGE=$(python ${{ github.action_path }}/parse_out_range.py)
-        fi
+        export GHA_INPUT_RANGE="${{ inputs.range }}"
 
         MIN_THRU_MAX_SERIES_SPACED=$(python -c "
         from wipac_dev_tools import semver_parser_tools
+        import os
+        
+        if os.getenv('GHA_INPUT_RANGE'):
+          semver_range = os.getenv('GHA_INPUT_RANGE')
+        else:
+          semver_range = semver_parser_tools.get_py_semver_range_for_project() 
 
         top_python = semver_parser_tools.get_latest_py3_release()
         all_matches = semver_parser_tools.list_all_majmin_versions(
           major=top_python[0],
-          semver_range='$SEMVER_RANGE',
+          semver_range=semver_range,
           max_minor=top_python[1],
         )
         print(' '.join(f'{v[0]}.{v[1]}' for v in all_matches))
