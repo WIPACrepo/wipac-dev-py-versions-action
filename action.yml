@@ -20,7 +20,7 @@ runs:
         # step: gather-py-versions
         set -euo pipefail; echo "now: $(date -u +"%Y-%m-%dT%H:%M:%S.%3N")"
         
-        if [[ $(find /var/lib/apt/lists -type f -mtime -1 | wc -l) -eq 0 ]]; then
+        if [[ $(sudo find /var/lib/apt/lists -type f -mtime -1 | wc -l) -eq 0 ]]; then
             # only if apt lists are older than 1 day
             sudo apt-get update
         fi
