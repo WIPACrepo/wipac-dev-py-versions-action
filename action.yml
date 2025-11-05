@@ -20,7 +20,11 @@ runs:
         # step: gather-py-versions
         set -euo pipefail; echo "now: $(date -u +"%Y-%m-%dT%H:%M:%S.%3N")"
         
-        sudo apt-get update
+        if [[ $(find /var/lib/apt/lists -type f -mtime -1 | wc -l) -eq 0 ]]; then
+            # only if apt lists are older than 1 day
+            sudo apt-get update
+        fi
+        
         python -m venv action_venv
         . action_venv/bin/activate
         pip3 install -r ${{ github.action_path }}/requirements.txt
